@@ -23,6 +23,8 @@ import com.user.exception.ErrorDetails;
 import com.user.exception.ResourceNotFoundException;
 import com.user.service.IUserService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("api/user")
 public class UserController {
@@ -43,14 +45,14 @@ public class UserController {
 	}
 
 	@PostMapping
-	public ResponseEntity<UserDto> saveUser(@RequestBody UserDto userDto) {
+	public ResponseEntity<UserDto> saveUser( @Valid @RequestBody UserDto userDto) {
 		UserDto saveAllUser = userService.saveAllUser(userDto);
 		return new ResponseEntity<>(saveAllUser, HttpStatus.CREATED);
 
 	}
 
 	@PutMapping("{id}")
-	public ResponseEntity<UserDto> updateUser(@RequestBody UserDto user, @PathVariable long id) {
+	public ResponseEntity<UserDto> updateUser( @Valid @RequestBody UserDto user, @PathVariable long id) {
 		//user.setId(id);
 		UserDto updateUser = userService.updateUser(user, id);
 		return new ResponseEntity<>(updateUser, HttpStatus.OK);
