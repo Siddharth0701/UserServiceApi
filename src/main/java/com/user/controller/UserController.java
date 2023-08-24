@@ -23,13 +23,33 @@ import com.user.exception.ErrorDetails;
 import com.user.exception.ResourceNotFoundException;
 import com.user.service.IUserService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
+@Tag(name = "CRUD Rest api for user resources", description = "Create user, update user, get all user, get specific user and delete user")
 @RestController
 @RequestMapping("api/user")
 public class UserController {
 	@Autowired
 	private IUserService userService;
+
+	@Operation(
+			summary="Create User Rest api",
+			description="Create User REST API is used to save user in database"
+			)
+	@ApiResponse(
+			responseCode = "201",
+			description = "HTTP STATUS 201  CREATED"
+			)
+	
+	@PostMapping
+	public ResponseEntity<UserDto> saveUser(@Valid @RequestBody UserDto userDto) {
+		UserDto saveAllUser = userService.saveAllUser(userDto);
+		return new ResponseEntity<>(saveAllUser, HttpStatus.CREATED);
+
+	}
 
 	@GetMapping
 	public ResponseEntity<List<UserDto>> findAll() {
@@ -44,16 +64,9 @@ public class UserController {
 		return new ResponseEntity<>(findUserById, HttpStatus.OK);
 	}
 
-	@PostMapping
-	public ResponseEntity<UserDto> saveUser( @Valid @RequestBody UserDto userDto) {
-		UserDto saveAllUser = userService.saveAllUser(userDto);
-		return new ResponseEntity<>(saveAllUser, HttpStatus.CREATED);
-
-	}
-
 	@PutMapping("{id}")
-	public ResponseEntity<UserDto> updateUser( @Valid @RequestBody UserDto user, @PathVariable long id) {
-		//user.setId(id);
+	public ResponseEntity<UserDto> updateUser(@Valid @RequestBody UserDto user, @PathVariable long id) {
+		// user.setId(id);
 		UserDto updateUser = userService.updateUser(user, id);
 		return new ResponseEntity<>(updateUser, HttpStatus.OK);
 	}
