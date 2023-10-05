@@ -1,5 +1,6 @@
 package com.user;
 
+import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -12,6 +13,7 @@ import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.info.License;
 
 @SpringBootApplication
+@EnableEncryptableProperties
 @OpenAPIDefinition(
 		info=@Info(
 				
@@ -39,6 +41,7 @@ public class UserServiceApplication {
 	public ModelMapper modelMapper() {
 		return new ModelMapper();
 	}
+
 
 	public static void main(String[] args) {
 		SpringApplication.run(UserServiceApplication.class, args);
