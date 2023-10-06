@@ -1,5 +1,10 @@
 # UserServiceApi
+
 #FROM eclipse-temurin:17
+
+# git notes
+FROM eclipse-temurin:17
+
 LABEL mentainer="siddharth.singh0701@gmail.com"
 WORKDIR /app
 COPY target/springboot-docker-demo-0.0.1-SNAPSHOT.jar /app/springboot-docker-demo.jar
@@ -60,6 +65,7 @@ docker run --network springboot-mysql-net --name springboot-mysql-container -p 8
 
 
 
+<<<<<<< HEAD
 -----------docker compose
 
 --------------install docker and docker compose on linux aws ec2
@@ -85,4 +91,6 @@ docker-compose version
 
 
 
+=======
+>>>>>>> c96848395e7c5ef8e6d021803d5944dd0d90402b
 
